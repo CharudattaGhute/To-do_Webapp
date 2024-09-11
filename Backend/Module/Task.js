@@ -9,14 +9,10 @@ const TaskSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
-    required: true,
-  },
+
   priority: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Priority",
+    type: String,
+    enum: ["Extreme", "Moderate", "Low"],
     required: true,
   },
   image: {
