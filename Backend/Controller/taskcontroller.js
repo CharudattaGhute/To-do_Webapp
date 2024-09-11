@@ -8,22 +8,15 @@ async function addtask(req, res) {
   console.log(req.body);
   const userid = req.user._id;
 
-  const {
-    title,
-    description,
-    category,
-    priority,
-    image,
-    createdBy,
-    createdAt,
-  } = req.body;
+  const { title, description, priority, image } = req.body;
+
+  const allowedPriorities = ["Extreme", "Moderate", "Low"];
 
   try {
-    const existingpriority = await prioritymodel.findById(priority);
-    if (!existingpriority) {
+    if (!allowedPriorities.includes(priority)) {
       return res
-        .status(404)
-        .send({ msg: "Priority not found", success: false });
+        .status(400)
+        .send({ msg: "Invalid priority value", success: false });
     }
 
     const existingtask = await taskmodel.findOne({
@@ -33,13 +26,12 @@ async function addtask(req, res) {
     if (existingtask) {
       return res
         .status(400)
-        .send({ msg: "task already exists", success: false });
+        .send({ msg: "Task already exists", success: false });
     }
 
     const newtask = new taskmodel({
       title,
       description,
-      category,
       priority,
       image,
       createdBy: userid,
