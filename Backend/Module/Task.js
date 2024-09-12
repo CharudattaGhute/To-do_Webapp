@@ -15,6 +15,15 @@ const TaskSchema = new mongoose.Schema({
     enum: ["Extreme", "Moderate", "Low"],
     required: true,
   },
+  taskDate: {
+    type: Date,
+    required: false,
+  },
+  status: {
+    type: String,
+    enum: ["Not started", "Completed", "Inprogress"],
+    default: "Not started",
+  },
   image: {
     type: String,
   },

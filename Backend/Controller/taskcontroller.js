@@ -8,7 +8,7 @@ async function addtask(req, res) {
   console.log(req.body);
   const userid = req.user._id;
 
-  const { title, description, priority, image } = req.body;
+  const { title, description, priority, taskDate, status, image } = req.body;
 
   const allowedPriorities = ["Extreme", "Moderate", "Low"];
 
@@ -33,6 +33,8 @@ async function addtask(req, res) {
       title,
       description,
       priority,
+      taskDate,
+      status,
       image,
       createdBy: userid,
       createdAt: Date.now(),
@@ -112,6 +114,8 @@ async function getalltask(req, res) {
       description: task.description,
       category: task.category,
       priority: task.priority,
+      taskDate: task.taskDate,
+      status: task.status,
       image: task.image,
       createdBy: task.createdBy,
       createdAt: task.createdAt,
