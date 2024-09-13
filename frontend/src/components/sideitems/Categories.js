@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { Link, useNavigate } from "react-router-dom";
+
+import CreateCategoryForm from "./CreatecategoryForm";
+
 import "../CSS/categories.css"; // Import the component-specific CSS file
 
 const TaskCategories = () => {
+  const navigate = useNavigate();
   const [taskStatus, setTaskStatus] = useState([
     { id: 1, name: "Completed" },
     { id: 2, name: "In Progress" },
@@ -24,18 +29,33 @@ const TaskCategories = () => {
   const handleDelete = (type, id) => {
     console.log(`Delete ${type} with id: ${id}`);
   };
+  const handlecategory = () => {
+    navigate("createcategory");
+  };
 
   return (
-    <div className="task-categories-container">
+    <div
+      className="task-categories-container"
+      style={{ border: "2px solid black" }}
+    >
+      <div
+        className="button"
+        style={{ marginLeft: "90%", color: "black", listStyle: "none" }}
+      >
+        <Link to={"/dashboard"}>
+          <span type="button">Go Back</span>
+        </Link>
+      </div>
       <h2>Task Categories</h2>
-      <Button variant="success" className="mb-3">
+
+      <Button variant="danger" className="mb-3" onClick={handlecategory}>
         Add Category
       </Button>
 
       <div className="mb-5">
         <h4>Task Status</h4>
-        <Button variant="link" className="mb-2">
-          + Add Task Status
+        <Button variant="button" className="mb-2" style={{ marginLeft: "80%" }}>
+          <span style={{ color: "orange" }}>+</span> Add Task Status
         </Button>
         <Table bordered>
           <thead>
@@ -73,8 +93,8 @@ const TaskCategories = () => {
 
       <div>
         <h4>Task Priority</h4>
-        <Button variant="link" className="mb-2">
-          + Add New Priority
+        <Button variant="button" className="mb-2" style={{ marginLeft: "80%" }}>
+          <span style={{ color: "orange" }}>+</span> Add New Priority
         </Button>
         <Table bordered>
           <thead>
