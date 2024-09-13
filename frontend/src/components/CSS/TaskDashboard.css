@@ -11,28 +11,28 @@
     transform: scale(1.02);
   }
   
-  /* Add borders to the task sections */
+  
   .task-section {
-    border: 1px solid #ddd; /* Light grey border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 2rem; /* Increased padding */
-    background-color: #f9f9f9; /* Light background color */
-    box-sizing: border-box; /* Ensure padding is included in width/height calculations */
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    padding: 2rem; 
+    background-color: #f9f9f9; 
+    box-sizing: border-box; 
   }
   
-  /* Heading border and spacing */
+  
   .task-section h5 {
-    border-bottom: 2px solid #ddd; /* Border below the heading */
+    border-bottom: 2px solid #ddd; 
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
   }
   
-  /* Status circle container */
+  
   .circle-container {
     display: flex;
     justify-content: space-between;
-    gap: 20px; /* Adjust gap between circles */
-    margin-bottom: 2rem; /* Space below the circles */
+    gap: 20px; 
+    margin-bottom: 2rem; 
   }
   
   /* Circle item with fixed size */
