@@ -1,0 +1,82 @@
+/* General styles */
+.container {
+    margin-top: 10%;
+  }
+  
+  .task-card {
+    transition: transform 0.3s;
+  }
+  
+  .task-card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Add borders to the task sections */
+  .task-section {
+    border: 1px solid #ddd; /* Light grey border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 2rem; /* Increased padding */
+    background-color: #f9f9f9; /* Light background color */
+    box-sizing: border-box; /* Ensure padding is included in width/height calculations */
+  }
+  
+  /* Heading border and spacing */
+  .task-section h5 {
+    border-bottom: 2px solid #ddd; /* Border below the heading */
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Status circle container */
+  .circle-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Adjust gap between circles */
+    margin-bottom: 2rem; /* Space below the circles */
+  }
+  
+  /* Circle item with fixed size */
+  .circle-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px; /* Fixed width for consistency */
+    height: 140px; /* Height to accommodate status name */
+    padding: 10px;
+    border: 1px solid #ddd; /* Border around each circle item */
+    border-radius: 5px; /* Rounded corners for each circle item */
+    background-color: #fff; /* Background color */
+    box-sizing: border-box; /* Ensures padding and border are included in width/height */
+    overflow: hidden; /* Prevents overflow of content */
+  }
+  
+  .circle-item .circular-progressbar {
+    width: 80px; /* Fixed width for circular progress bar */
+    height: 80px; /* Fixed height for circular progress bar */
+  }
+  
+  .circle-item p {
+    margin-top: 10px; /* Margin between circle and text */
+    font-size: 0.9rem;
+    text-align: center; /* Center-align text */
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .circle-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px; /* Maintain gap between circles */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .task-section h5 {
+      font-size: 1.2rem;
+    }
+  
+    .task-card {
+      font-size: 0.9rem;
+    }
+  }
+  

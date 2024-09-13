@@ -8,7 +8,7 @@ function AddTaskModal({ show, handleClose }) {
   const [priority, setPriority] = useState("Moderate");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  const [status, setStatus] = useState("Not started"); // Added status state
+  const [status, setStatus] = useState("Not started");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
