@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Image } from "react-bootstrap";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import axios from "axios";
@@ -91,36 +91,59 @@ function TaskDashboard() {
                     <Col md={6} key={task._id}>
                       <Card className="mb-4 task-card">
                         <Card.Body>
-                          <Card.Title>{task.title}</Card.Title>
-                          <Card.Text>
-                            {expandedTask === task._id
-                              ? task.description
-                              : `${task.description.substring(0, 100)}...`}
-                            {task.description.length > 100 && (
-                              <Button
-                                variant="link"
-                                onClick={() => handleReadMore(task._id)}
-                              >
+                          <Row>
+                            {/* Left Column for Text */}
+                            <Col xs={8}>
+                              <Card.Title>{task.title}</Card.Title>
+                              <Card.Text>
                                 {expandedTask === task._id
-                                  ? "Read Less"
-                                  : "Read More"}
-                              </Button>
-                            )}
-                            <br />
-                            Priority:{" "}
-                            <span style={{ color: "skyblue" }}>
-                              {task.priority}
-                            </span>{" "}
-                            | Status:{" "}
-                            <span style={{ color: "red" }}>{task.status}</span>
-                          </Card.Text>
+                                  ? task.description
+                                  : `${task.description.substring(0, 100)}...`}
+                                {task.description.length > 100 && (
+                                  <Button
+                                    variant="link"
+                                    onClick={() => handleReadMore(task._id)}
+                                  >
+                                    {expandedTask === task._id
+                                      ? "Read Less"
+                                      : "Read More"}
+                                  </Button>
+                                )}
+                                <br />
+                                Priority:{" "}
+                                <span style={{ color: "skyblue" }}>
+                                  {task.priority}
+                                </span>{" "}
+                                | Status:{" "}
+                                <span style={{ color: "red" }}>
+                                  {task.status}
+                                </span>
+                              </Card.Text>
+                            </Col>
+
+                            {/* Right Column for Image */}
+                            <Col xs={4} className="text-center">
+                              <Image
+                                src={
+                                  task.imageURL ||
+                                  "https://via.placeholder.com/100"
+                                }
+                                rounded
+                                fluid
+                                style={{ width: "100px", height: "100px" }}
+                              />
+                            </Col>
+                          </Row>
+                          <hr />
+                          <Row className="mt-2">
+                            <Col xs={12} className="text-end">
+                              <small className="text-muted">
+                                Created on:{" "}
+                                {new Date(task.taskDate).toLocaleDateString()}
+                              </small>
+                            </Col>
+                          </Row>
                         </Card.Body>
-                        <Card.Footer>
-                          <small className="text-muted">
-                            Created on:{" "}
-                            {new Date(task.taskDate).toLocaleDateString()}
-                          </small>
-                        </Card.Footer>
                       </Card>
                     </Col>
                   ))}
@@ -174,7 +197,7 @@ function TaskDashboard() {
             </div>
 
             <div className="task-section mt-4">
-              <h5>Completed Task</h5>
+              <h5>Completed Tasks</h5>
               <Row>
                 {tasks
                   .filter((task) => task.status === "Completed")
@@ -182,26 +205,46 @@ function TaskDashboard() {
                     <Col key={task._id}>
                       <Card className="mb-4 task-card">
                         <Card.Body>
-                          <Card.Title>{task.title}</Card.Title>
-                          <Card.Text>
-                            {task.description.length > 100
-                              ? `${task.description.substring(0, 100)}...`
-                              : task.description}
-                            <br />
-                            Priority:{" "}
-                            <span style={{ color: "skyblue" }}>
-                              {task.priority}
-                            </span>{" "}
-                            | Status:{" "}
-                            <span style={{ color: "red" }}>{task.status}</span>
-                          </Card.Text>
+                          <Row>
+                            <Col xs={8}>
+                              <Card.Title>{task.title}</Card.Title>
+                              <Card.Text>
+                                {task.description.length > 100
+                                  ? `${task.description.substring(0, 100)}...`
+                                  : task.description}
+                                <br />
+                                Priority:{" "}
+                                <span style={{ color: "skyblue" }}>
+                                  {task.priority}
+                                </span>{" "}
+                                | Status:{" "}
+                                <span style={{ color: "red" }}>
+                                  {task.status}
+                                </span>
+                              </Card.Text>
+                            </Col>
+                            <Col xs={4} className="text-center">
+                              <Image
+                                src={
+                                  task.imageURL ||
+                                  "https://via.placeholder.com/100"
+                                }
+                                rounded
+                                fluid
+                                style={{ width: "100px", height: "100px" }}
+                              />
+                            </Col>
+                          </Row>
+                          <hr />
+                          <Row className="mt-2">
+                            <Col xs={12} className="text-end">
+                              <small className="text-muted">
+                                Created on:{" "}
+                                {new Date(task.taskDate).toLocaleDateString()}
+                              </small>
+                            </Col>
+                          </Row>
                         </Card.Body>
-                        <Card.Footer>
-                          <small className="text-muted">
-                            Created on:{" "}
-                            {new Date(task.taskDate).toLocaleDateString()}
-                          </small>
-                        </Card.Footer>
                       </Card>
                     </Col>
                   ))}
