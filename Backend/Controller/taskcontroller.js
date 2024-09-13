@@ -179,6 +179,23 @@ async function deletetask(req, res) {
   }
 }
 
+const getFilteredTasks = async (req, res) => {
+  try {
+    const tasks = await taskmodel.find({
+      priority: { $in: ["Moderate", "Extreme"] },
+    });
+
+    res.status(201).send({
+      success: true,
+      tasks,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Unable to retrieve tasks",
+    });
+  }
+};
 module.exports = {
   addtask,
   //   ***Addcollbolaters***
@@ -188,4 +205,5 @@ module.exports = {
   getalltask,
   updatetask,
   deletetask,
+  getFilteredTasks,
 };
