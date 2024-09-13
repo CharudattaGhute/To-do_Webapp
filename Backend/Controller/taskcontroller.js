@@ -116,7 +116,7 @@ async function getalltask(req, res) {
       priority: task.priority,
       taskDate: task.taskDate,
       status: task.status,
-      image: task.image,
+      image: task.image ? `http://localhost:5001/uploads/${task.image}` : null,
       createdBy: task.createdBy,
       createdAt: task.createdAt,
       collaboraters: task.collaboraters,
