@@ -5,6 +5,7 @@ import axios from "axios";
 import TaskDashboard from "../components/sideitems/TaskDashboard";
 import Navbar from "../components/Navbar";
 import AdTaskModal from "../components/sideitems/AddTaskModal";
+import Categories from "../components/sideitems/Categories";
 import "../components/CSS/dashboard.css";
 
 const Dashboard = () => {
@@ -99,7 +100,7 @@ const Dashboard = () => {
             <Route path="taskDashboard" element={<TaskDashboard />} />
             <Route path="vitaltask" element={<h1>Vital Task</h1>} />
             <Route path="my-task" element={<h1>My Task</h1>} />
-            <Route path="task-categories" element={<h1>Task Categories</h1>} />
+            <Route path="task-categories" element={<Categories />} />
             <Route path="settings" element={<h1>Settings</h1>} />
             <Route path="help" element={<h1>Help</h1>} />
             <Route path="logout" element={<h1>Logout</h1>} />
