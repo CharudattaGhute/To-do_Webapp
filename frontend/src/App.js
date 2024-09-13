@@ -2,7 +2,7 @@ import "./App.css";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Navbar from "./components/Navbar";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,7 +13,6 @@ import {
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
         <Route path="/" element={<Register />} />
         <Route path="/login" element={<Login />} />
