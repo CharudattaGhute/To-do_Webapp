@@ -1,0 +1,85 @@
+/* TaskCategories Component Specific Styles */
+
+/* Container styling */
+.task-categories-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+  }
+  
+  /* Heading styles */
+  .task-categories-container h2, 
+  .task-categories-container h4 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Button styling */
+  .task-categories-container .btn {
+    border-radius: 5px;
+  }
+  
+  .task-categories-container .btn-primary {
+    background-color: #ff5722;
+    border-color: #ff5722;
+  }
+  
+  .task-categories-container .btn-primary:hover {
+    background-color: #e64a19;
+    border-color: #e64a19;
+  }
+  
+  /* Table styles */
+  .task-categories-container .table {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .task-categories-container .table th, 
+  .task-categories-container .table td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  
+  .task-categories-container .table td {
+    padding: 10px;
+  }
+  
+  .task-categories-container .table th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+  }
+  
+  /* Action buttons (edit, delete) */
+  .task-categories-container .btn-warning {
+    background-color: #ff9800;
+    border-color: #ff9800;
+  }
+  
+  .task-categories-container .btn-warning:hover {
+    background-color: #fb8c00;
+    border-color: #fb8c00;
+  }
+  
+  .task-categories-container .btn-danger {
+    background-color: #f44336;
+    border-color: #f44336;
+  }
+  
+  .task-categories-container .btn-danger:hover {
+    background-color: #e53935;
+    border-color: #e53935;
+  }
+  
+  /* Add Task Status and Priority buttons */
+  .task-categories-container .btn-link {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .task-categories-container .btn-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+  }
