@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import AdTaskModal from "../components/sideitems/AddTaskModal";
 import Categories from "../components/sideitems/Categories";
 import CreateCategoryForm from "../components/sideitems/CreatecategoryForm";
+import Vitaltask from "../components/sideitems/Vitaltask";
 
 import "../components/CSS/dashboard.css";
 
@@ -100,7 +101,7 @@ const Dashboard = () => {
         >
           <Routes>
             <Route path="taskDashboard" element={<TaskDashboard />} />
-            <Route path="vitaltask" element={<h1>Vital Task</h1>} />
+            <Route path="vitaltask" element={<Vitaltask />} />
             <Route path="my-task" element={<h1>My Task</h1>} />
             <Route path="task-categories/*" element={<Categories />} />
             <Route path="settings" element={<h1>Settings</h1>} />

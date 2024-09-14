@@ -213,12 +213,8 @@ function TaskDashboard() {
                                   ? `${task.description.substring(0, 100)}...`
                                   : task.description}
                                 <br />
-                                Priority:{" "}
-                                <span style={{ color: "skyblue" }}>
-                                  {task.priority}
-                                </span>{" "}
-                                | Status:{" "}
-                                <span style={{ color: "red" }}>
+                                Status:{" "}
+                                <span style={{ color: "green" }}>
                                   {task.status}
                                 </span>
                               </Card.Text>
