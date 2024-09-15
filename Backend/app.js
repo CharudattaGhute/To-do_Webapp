@@ -6,6 +6,7 @@ const taskrouter = require("./routes/taskrouter");
 const categoryrouter = require("./routes/categoryrouter");
 const priorityrouter = require("./routes/priorityrouter");
 const inviterouter = require("./routes/inviterouter");
+const imagerouter = require("./routes/imagerouter");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/api/task", taskrouter);
 app.use("/api/category", categoryrouter);
 app.use("/api/priority", priorityrouter);
 app.use("/api/invite", inviterouter);
+app.use("/api/image", imagerouter);
 
 app.use("/uploads", express.static("uploads"));
 
