@@ -1,0 +1,144 @@
+
+.account-info-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 50px auto;
+    font-family: 'Arial', sans-serif;
+    margin-top: 100px;
+    margin-right: 500px;
+  }
+  
+  .go-back {
+    color: #007bff;
+    text-align: right;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+  }
+  
+  .go-back:hover {
+    color: #0056b3;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .profile-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    border: 2px solid #ddd;
+  }
+  
+  .profile-section h4 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .profile-section p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .info-form form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .info-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .info-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .info-form input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .update-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .update-btn:hover {
+    background-color: #218838;
+  }
+  
+  .password-btn {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .password-btn:hover {
+    background-color: #e64a19;
+  }
+  
+  @media (max-width: 768px) {
+    .account-info-container {
+      padding: 20px;
+    }
+  
+    .profile-img {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .profile-section {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .profile-section h4 {
+      font-size: 1.2rem;
+    }
+  
+    .profile-section p {
+      font-size: 0.9rem;
+    }
+  }
