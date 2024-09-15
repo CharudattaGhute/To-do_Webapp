@@ -47,6 +47,7 @@ function TaskDashboard() {
           }
         );
         setTasks(response.data.modifiedtask);
+        console.log(response.data.modifiedtask);
       } catch (error) {
         console.log("Error fetching tasks:", error);
       }
@@ -125,8 +126,9 @@ function TaskDashboard() {
                             <Col xs={4} className="text-center">
                               <Image
                                 src={
-                                  task.imageURL ||
-                                  "https://via.placeholder.com/100"
+                                  task.image
+                                    ? task.image
+                                    : "http://localhost:5001/uploads/default-image.jpg"
                                 }
                                 rounded
                                 fluid
@@ -222,8 +224,9 @@ function TaskDashboard() {
                             <Col xs={4} className="text-center">
                               <Image
                                 src={
-                                  task.imageURL ||
-                                  "https://via.placeholder.com/100"
+                                  task.image
+                                    ? task.image
+                                    : "http://localhost:5001/uploads/default-image.jpg"
                                 }
                                 rounded
                                 fluid
