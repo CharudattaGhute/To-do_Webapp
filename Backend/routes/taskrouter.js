@@ -11,5 +11,6 @@ router.get("/getalltask", auth, taskcontroller.getalltask);
 router.put("/updatetask/:id", auth, taskcontroller.updatetask);
 router.delete("/deletetask/:id", auth, taskcontroller.deletetask);
 router.get("/getFilteredTasks", auth, taskcontroller.getFilteredTasks);
+router.get("/getTasksForUser", auth, taskcontroller.getTasksForUser);
 
 module.exports = router;
