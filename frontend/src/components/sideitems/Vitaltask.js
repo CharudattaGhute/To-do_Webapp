@@ -16,6 +16,9 @@ function Vitaltask() {
       })
       .then((response) => {
         setTasks(response.data.tasks);
+        if (response.data.tasks.length > 0) {
+          setSelectedTask(response.data.tasks[0]); // Set the first task as selected by default
+        }
         console.log(response.data);
       })
       .catch((error) => {
@@ -28,56 +31,105 @@ function Vitaltask() {
     setSelectedTask(task);
   };
 
+  // Helper functions for styling
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Completed":
+        return "danger";
+      case "In Progress":
+        return "primary";
+      default:
+        return "secondary";
+    }
+  };
+
+  const getPriorityColor = (priority) => {
+    return priority === "Extreme" ? "danger" : "info";
+  };
+
   return (
-    <div className="container" style={{ marginTop: "10%" }}>
+    <div
+      className="container"
+      style={{
+        marginTop: "10%",
+        border: "2px solid black",
+        borderRadius: "8px",
+        padding: "20px", // Added padding for better spacing
+      }}
+    >
       <Container fluid className="mt-3">
         <Row>
-          {/* Task list on the left */}
           <Col md={4}>
+            <h4>Vital Task</h4>
             <ListGroup>
               {tasks.map((task) => (
                 <ListGroup.Item
                   key={task._id}
                   action
                   onClick={() => handleTaskClick(task)}
-                  className="d-flex align-items-center mb-3"
+                  className="d-flex align-items-start mb-3 p-3"
                   style={{
                     cursor: "pointer",
                     boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                    height: "150px", // Adjust height as needed
+                    height: "180px", // Increased height
+                    borderRadius: "8px",
+                    border: "1px solid #ddd", // Border for better definition
+                    backgroundColor: "#f9f9f9", // Slightly different background color
                   }}
                 >
-                  <div className="me-2">
-                    {/* Task title */}
-                    <div className="fw-bold">{task.title}</div>
-
-                    {/* Limit the task description to one line */}
-                    <div
-                      className="text-truncate"
+                  {/* Task content */}
+                  <div className="me-3">
+                    {/* Task image */}
+                    <img
+                      src={
+                        task.image
+                          ? task.image
+                          : "http://localhost:5001/uploads/default-image.jpg"
+                      }
+                      alt="Task"
                       style={{
-                        maxWidth: "200px",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
+                        width: "100px",
+                        height: "100px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
                       }}
-                    >
-                      {task.description}
-                      <p>Priority: {task.priority}</p>
-                    </div>
+                    />
                   </div>
 
-                  {/* Task image */}
-                  <img
-                    src={task.imageUrl || "https://via.placeholder.com/100"}
-                    alt="Task"
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      objectFit: "cover",
-                      borderRadius: "8px",
-                      marginLeft: "auto",
-                    }}
-                  />
+                  {/* Text content */}
+                  <div className="d-flex flex-column justify-content-between">
+                    <div>
+                      {/* Task title */}
+                      <div className="fw-bold mb-1">{task.title}</div>
+
+                      {/* Limit the task description to one line */}
+                      <div
+                        className="text-truncate mb-1"
+                        style={{
+                          maxWidth: "200px",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {task.description}
+                      </div>
+                      <div className="mb-2">
+                        <p className="mb-0">
+                          Priority:{" "}
+                          <Badge bg={getPriorityColor(task.priority)}>
+                            {task.priority}
+                          </Badge>
+                        </p>
+                        <p className="mb-0">
+                          Status:{" "}
+                          <Badge bg={getStatusColor(task.status)}>
+                            {task.status}
+                          </Badge>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </ListGroup.Item>
               ))}
             </ListGroup>
@@ -86,31 +138,60 @@ function Vitaltask() {
           {/* Task details on the right */}
           <Col md={8}>
             {selectedTask ? (
-              <Card>
-                <Card.Img variant="top" src={selectedTask.imageUrl} />
+              <Card
+                style={{
+                  border: "1px solid #ddd", // Border for better definition
+                  borderRadius: "8px", // Rounded corners
+                }}
+              >
+                <Card.Img
+                  variant="top"
+                  src={
+                    selectedTask.image
+                      ? selectedTask.image
+                      : "http://localhost:5001/uploads/default-image.jpg"
+                  }
+                  style={{
+                    borderTopLeftRadius: "8px",
+                    borderTopRightRadius: "8px",
+                  }}
+                />
                 <Card.Body>
                   <Card.Title>{selectedTask.title}</Card.Title>
                   <Card.Text>{selectedTask.description}</Card.Text>
-                  <Badge
-                    bg={
-                      selectedTask.priority === "Extreme"
-                        ? "danger"
-                        : "secondary"
-                    }
-                  >
-                    {selectedTask.priority}
-                  </Badge>
-                  <p className="mt-2">Status: {selectedTask.status}</p>
-                  <ul>
+                  <p>
+                    Priority:{" "}
+                    <Badge
+                      bg={getPriorityColor(selectedTask.priority)}
+                      style={{ marginRight: "5px" }}
+                    >
+                      {selectedTask.priority}
+                    </Badge>
+                  </p>
+                  <p>
+                    Status:{" "}
+                    <Badge
+                      bg={getStatusColor(selectedTask.status)}
+                      style={{ marginRight: "5px" }}
+                    >
+                      {selectedTask.status}
+                    </Badge>
+                  </p>
+                  <ul className="mt-3">
                     {selectedTask.actions?.map((action, index) => (
                       <li key={index}>{action}</li>
                     ))}
                   </ul>
                 </Card.Body>
+                <Card.Footer
+                  className="text-muted"
+                  style={{ borderTop: "1px solid #ddd" }}
+                >
+                  Created on:{" "}
+                  {new Date(selectedTask.taskDate).toLocaleDateString()}
+                </Card.Footer>
               </Card>
-            ) : (
-              <p>Select a task to see the details</p>
-            )}
+            ) : null}
           </Col>
         </Row>
       </Container>
