@@ -36,7 +36,7 @@ const TaskCategories = () => {
   return (
     <div
       className="task-categories-container"
-      style={{ border: "2px solid black" }}
+      style={{ border: "2px solid black", marginTop: "10%" }}
     >
       <div
         className="button"
