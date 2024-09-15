@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,6 +8,26 @@ import "./CSS/Navbar.css";
 const Navbar = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState("");
+  const [currentDay, setCurrentDay] = useState("");
+
+  useEffect(() => {
+    // Get the current date in a readable format
+    const today = new Date();
+    setCurrentDate(today.toLocaleDateString());
+
+    // Set the current day of the week
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    setCurrentDay(days[today.getDay()]);
+  }, []);
 
   const handleCalendarClick = () => {
     setShowCalendar(!showCalendar);
@@ -16,7 +36,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light fixed-top">
       <div className="container-fluid">
-        <a className="navbar-brand" href="l">
+        <a className="navbar-brand" href="#">
           <strong>
             <span>Dash</span>board
           </strong>
@@ -35,9 +55,8 @@ const Navbar = () => {
         </form>
 
         <div className="d-flex align-items-center">
-          <a href="l" className="nav-icons me-3">
-            {/* Your bell icon code */}
-            {/* <i className="bi bi-bell-fill"></i> */}
+          <a href="#" className="nav-icons me-3">
+            {/* Bell icon */}
             <svg
               width="45"
               height="45"
@@ -64,34 +83,30 @@ const Navbar = () => {
             >
               <rect width="45" height="45" rx="8" fill="#FF6767" />
               <path
-                d="M30.875 14.6839L26.3711 14.684V13.5626C26.3711 13.2518 26.1193 13 25.8086 13C25.4978 13 25.2461 13.2518 25.2461 13.5626V14.6837H20.7461V13.5626C20.7461 13.2518 20.4943 13 20.1836 13C19.8728 13 19.6211 13.2518 19.6211 13.5626V14.6837H15.125C14.5037 14.6837 14 15.1875 14 15.8089V29.8747C14 30.4961 14.5037 31 15.125 31H30.875C31.4963 31 32 30.4961 32 29.8747V15.8089C32 15.1878 31.4963 14.6839 30.875 14.6839ZM30.875 29.8747H15.125V15.8089H19.6211V16.3758C19.6211 16.6866 19.8728 16.9384 20.1836 16.9384C20.4943 16.9384 20.7461 16.6866 20.7461 16.3758V15.8092H25.2461V16.3761C25.2461 16.6869 25.4978 16.9387 25.8086 16.9387C26.1193 16.9387 26.3711 16.6869 26.3711 16.3761V15.8092H30.875V29.8747ZM26.9375 21.9982H28.0625C28.373 21.9982 28.625 21.7461 28.625 21.4355V20.3103C28.625 19.9997 28.373 19.7476 28.0625 19.7476H26.9375C26.627 19.7476 26.375 19.9997 26.375 20.3103V21.4355C26.375 21.7461 26.627 21.9982 26.9375 21.9982ZM26.9375 26.4989H28.0625C28.373 26.4989 28.625 26.2471 28.625 25.9363V24.811C28.625 24.5005 28.373 24.2484 28.0625 24.2484H26.9375C26.627 24.2484 26.375 24.5005 26.375 24.811V25.9363C26.375 26.2474 26.627 26.4989 26.9375 26.4989ZM23.5625 24.2484H22.4375C22.127 24.2484 21.875 24.5005 21.875 24.811V25.9363C21.875 26.2471 22.127 26.4989 22.4375 26.4989H23.5625C23.873 26.4989 24.125 26.2471 24.125 25.9363V24.811C24.125 24.5007 23.873 24.2484 23.5625 24.2484ZM23.5625 19.7476H22.4375C22.127 19.7476 21.875 19.9997 21.875 20.3103V21.4355C21.875 21.7461 22.127 21.9982 22.4375 21.9982H23.5625C23.873 21.9982 24.125 21.7461 24.125 21.4355V20.3103C24.125 19.9997 23.873 19.7476 23.5625 19.7476Z"
+                d="M30.875 14.6839L26.3711 14.684V13.5626C26.3711 13.2518 26.1193 13 25.8086 13C25.4978 13 25.2461 13.2518 25.2461 13.5626V14.6837H20.7461V13.5626C20.7461 13.2518 20.4943 13 20.1836 13C19.8728 13 19.6211 13.2518 19.6211 13.5626V14.6837H15.125C14.5037 14.6837 14 15.1875 14 15.8089V29.8747C14 30.4961 14.5037 31 15.125 31H30.875C31.4963 31 32 30.4961 32 29.8747V15.8089C32 15.1878 31.4963 14.6839 30.875 14.6839ZM20.1836 15.8089H25.2461V19.2963H20.1836V15.8089ZM30.875 28.0877H15.125V16.8827H30.875V28.0877Z"
                 fill="white"
               />
             </svg>
           </a>
 
-          {/* Conditionally render DatePicker */}
+          {/* Calendar Dropdown */}
           {showCalendar && (
-            <div
-              className="calendar-container"
-              style={{
-                position: "absolute",
-                right: "20px",
-                top: "50px",
-                zIndex: 1000,
-                backgroundColor: "#fff",
-                padding: "10px",
-                borderRadius: "8px",
-                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-              }}
-            >
+            <div className="calendar-dropdown">
               <DatePicker
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
+                dateFormat="MMMM d, yyyy"
                 inline
               />
             </div>
           )}
+
+          {/* Date Information */}
+          <div class="d-flex flex-column bd-highlight mb-3 ml-2 justify-content-start">
+            {/* Display current date and day */}
+            <span className="text-black me-3">{currentDate}</span>
+            <span className="text-black me-3">{currentDay}</span>
+          </div>
         </div>
       </div>
     </nav>
