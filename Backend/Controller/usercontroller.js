@@ -18,6 +18,7 @@ async function register(req, res) {
   try {
     const user = await usermodel.findOne({ email });
     if (!user) {
+      const image = req.file ? req.file.filename : null;
       const newUser = new usermodel({
         firstname,
         lastname,
@@ -25,6 +26,7 @@ async function register(req, res) {
         email,
         password,
         confirmPassword,
+        image,
         createdAt: Date.now(),
       });
 

@@ -29,7 +29,6 @@ const addtask = async (req, res) => {
         .send({ msg: "Task already exists", success: false });
     }
 
-    // Handle image upload (if an image is included)
     const image = req.file ? req.file.filename : null;
 
     const newtask = new taskmodel({
@@ -182,6 +181,7 @@ async function deletetask(req, res) {
   }
 }
 
+// ********** Getfiltered task **************
 const getFilteredTasks = async (req, res) => {
   try {
     const tasks = await taskmodel.find({
@@ -199,6 +199,25 @@ const getFilteredTasks = async (req, res) => {
     });
   }
 };
+
+// ************ get only task created by user **********
+
+// Fetch tasks for the logged-in user
+const getTasksForUser = async (req, res) => {
+  try {
+    // Fetch tasks created by the logged-in user
+    const tasks = await taskmodel.find({ createdBy: req.user._id });
+
+    if (tasks.length === 0) {
+      return res.status(404).json({ message: "No tasks found for this user" });
+    }
+
+    res.status(200).send({ tasks });
+  } catch (error) {
+    res.status(500).send({ message: "Server Error", error });
+  }
+};
+
 module.exports = {
   addtask,
   //   ***Addcollbolaters***
@@ -209,4 +228,5 @@ module.exports = {
   updatetask,
   deletetask,
   getFilteredTasks,
+  getTasksForUser,
 };
