@@ -4,11 +4,11 @@ const prioritymodel = require("../Module/Priority");
 const usermodel = require("../Module/User");
 
 // ******** Addproducts*************
-async function addtask(req, res) {
+const addtask = async (req, res) => {
   console.log(req.body);
   const userid = req.user._id;
 
-  const { title, description, priority, taskDate, status, image } = req.body;
+  const { title, description, priority, taskDate, status } = req.body;
 
   const allowedPriorities = ["Extreme", "Moderate", "Low"];
 
@@ -29,6 +29,9 @@ async function addtask(req, res) {
         .send({ msg: "Task already exists", success: false });
     }
 
+    // Handle image upload (if an image is included)
+    const image = req.file ? req.file.filename : null;
+
     const newtask = new taskmodel({
       title,
       description,
@@ -46,7 +49,7 @@ async function addtask(req, res) {
     console.error(error);
     res.status(500).send("Server Error");
   }
-}
+};
 
 // *************** Addcollaboraters ***********
 const addCollaborator = async (req, res) => {
