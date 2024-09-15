@@ -28,6 +28,8 @@ app.use("/api/category", categoryrouter);
 app.use("/api/priority", priorityrouter);
 app.use("/api/invite", inviterouter);
 
+app.use("/uploads", express.static("uploads"));
+
 app.listen(5001, () => {
   console.log("http://localhost:5001");
 });
