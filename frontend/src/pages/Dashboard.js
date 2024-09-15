@@ -97,7 +97,7 @@ const Dashboard = () => {
 
         <div
           className="content"
-          style={{ marginLeft: "60px", padding: "20px", width: "100%" }}
+          style={{ marginLeft: "40px", padding: "10px", width: "100%" }}
         >
           <Routes>
             <Route path="taskDashboard" element={<TaskDashboard />} />
