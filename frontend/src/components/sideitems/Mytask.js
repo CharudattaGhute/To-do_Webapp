@@ -12,9 +12,8 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import "../CSS/vital.css"; // Correct import path if needed
 
-function Vitaltask() {
+function Mytask() {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
 
@@ -22,9 +21,10 @@ function Vitaltask() {
   const [updatedTitle, setUpdatedTitle] = useState("");
   const [updatedDescription, setUpdatedDescription] = useState("");
 
+  // Fetch tasks from API with token
   useEffect(() => {
     axios
-      .get("http://localhost:5001/api/task/getFilteredTasks", {
+      .get("http://localhost:5001/api/task/getTasksForUser", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -36,7 +36,7 @@ function Vitaltask() {
         }
       })
       .catch((error) => {
-        console.error("Error fetching tasks", error);
+        console.error("There was an error fetching the tasks!", error);
       });
   }, []);
 
@@ -44,6 +44,7 @@ function Vitaltask() {
     setSelectedTask(task);
   };
 
+  // Helper functions for styling
   const getStatusColor = (status) => {
     switch (status) {
       case "Completed":
@@ -126,69 +127,67 @@ function Vitaltask() {
       <Container fluid className="mt-3">
         <Row>
           <Col md={4}>
-            <h4>Vital Task</h4>
+            <h4>My Task</h4>
             <ListGroup>
-              {tasks.map((task) =>
-                task ? (
-                  <ListGroup.Item
-                    key={task._id}
-                    action
-                    onClick={() => handleTaskClick(task)}
-                    className="d-flex align-items-start mb-3 p-3"
-                    style={{
-                      cursor: "pointer",
-                      boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                      height: "180px",
-                      borderRadius: "8px",
-                      border: "1px solid #ddd",
-                      backgroundColor: "#f9f9f9",
-                    }}
-                  >
-                    <div className="me-3">
-                      <img
-                        src={
-                          task.image
-                            ? `http://localhost:5001/uploads/${task.image}`
-                            : "http://localhost:5001/uploads/default-image.jpg"
-                        }
-                        alt="Task"
-                        style={{
-                          width: "100px",
-                          height: "100px",
-                          objectFit: "cover",
-                          borderRadius: "8px",
-                        }}
-                      />
-                    </div>
+              {tasks.map((task) => (
+                <ListGroup.Item
+                  key={task._id}
+                  action
+                  onClick={() => handleTaskClick(task)}
+                  className="d-flex align-items-start mb-3 p-3"
+                  style={{
+                    cursor: "pointer",
+                    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+                    height: "180px",
+                    borderRadius: "8px",
+                    border: "1px solid #ddd",
+                    backgroundColor: "#f9f9f9",
+                  }}
+                >
+                  <div className="me-3">
+                    <img
+                      src={
+                        task.image
+                          ? `http://localhost:5001/uploads/${task.image}`
+                          : "http://localhost:5001/uploads/default-image.jpg"
+                      }
+                      alt="Task"
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                      }}
+                    />
+                  </div>
 
-                    <div className="d-flex flex-column justify-content-between">
-                      <div>
-                        <div className="fw-bold mb-1">{task.title}</div>
-                        <div
-                          className="text-truncate mb-1"
-                          style={{ maxWidth: "200px" }}
-                        >
-                          {task.description}
-                        </div>
-                        <div className="mb-2">
-                          <p className="mb-0">
-                            Priority:{" "}
-                            <Badge bg={getPriorityColor(task.priority)}>
-                              {task.priority}
-                            </Badge>
-                          </p>
-                          <p className="mb-0">
-                            Status:{" "}
-                            <Badge bg={getStatusColor(task.status)}>
-                              {task.status}
-                            </Badge>
-                          </p>
-                        </div>
+                  <div className="d-flex flex-column justify-content-between">
+                    <div>
+                      <div className="fw-bold mb-1">{task.title}</div>
+                      <div
+                        className="text-truncate mb-1"
+                        style={{ maxWidth: "200px" }}
+                      >
+                        {task.description}
+                      </div>
+                      <div className="mb-2">
+                        <p className="mb-0">
+                          Priority:{" "}
+                          <Badge bg={getPriorityColor(task.priority)}>
+                            {task.priority}
+                          </Badge>
+                        </p>
+                        <p className="mb-0">
+                          Status:{" "}
+                          <Badge bg={getStatusColor(task.status)}>
+                            {task.status}
+                          </Badge>
+                        </p>
                       </div>
                     </div>
-                  </ListGroup.Item>
-                ) : null
-              )}
+                  </div>
+                </ListGroup.Item>
+              ))}
             </ListGroup>
           </Col>
 
@@ -201,52 +200,49 @@ function Vitaltask() {
                   position: "relative",
                 }}
               >
-                <Card.Body>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div style={{ flex: "0 0 150px", marginRight: "20px" }}>
-                      <Card.Img
-                        src={
-                          selectedTask.image
-                            ? `http://localhost:5001/uploads/${selectedTask.image}`
-                            : "http://localhost:5001/uploads/default-image.jpg"
-                        }
-                        style={{
-                          width: "200px",
-                          height: "200px",
-                          objectFit: "cover",
-                          borderRadius: "8px",
-                        }}
-                      />
-                    </div>
+                <Card.Body
+                  style={{ display: "flex", alignItems: "flex-start" }}
+                >
+                  <div style={{ flex: "0 0 150px", marginRight: "20px" }}>
+                    <Card.Img
+                      src={
+                        selectedTask.image
+                          ? `http://localhost:5001/uploads/${selectedTask.image}`
+                          : "http://localhost:5001/uploads/default-image.jpg"
+                      }
+                      style={{
+                        width: "200px",
+                        height: "200px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                      }}
+                    />
+                  </div>
 
-                    <div style={{ flex: "1" }}>
-                      <Card.Title>{selectedTask.title}</Card.Title>
-
-                      <p>
-                        Priority:{" "}
-                        <Badge bg={getPriorityColor(selectedTask.priority)}>
-                          {selectedTask.priority}
-                        </Badge>
-                      </p>
-                      <p>
-                        Status:{" "}
-                        <Badge bg={getStatusColor(selectedTask.status)}>
-                          {selectedTask.status}
-                        </Badge>
-                      </p>
-
-                      <Card.Text>{selectedTask.description}</Card.Text>
-
-                      {/* Additional content below description */}
-                      <div className="additional-info">
-                        <h5>Additional Information</h5>
-                        <p>Additional content or features can go here.</p>
-                      </div>
+                  <div style={{ flex: "1" }}>
+                    <Card.Title>{selectedTask.title}</Card.Title>
+                    <p>
+                      Priority:{" "}
+                      <Badge
+                        bg={getPriorityColor(selectedTask.priority)}
+                        style={{ marginRight: "5px" }}
+                      >
+                        {selectedTask.priority}
+                      </Badge>
+                    </p>
+                    <p>
+                      Status:{" "}
+                      <Badge
+                        bg={getStatusColor(selectedTask.status)}
+                        style={{ marginRight: "5px" }}
+                      >
+                        {selectedTask.status}
+                      </Badge>
+                    </p>
+                    <Card.Text>{selectedTask.description}</Card.Text>
+                    <div className="additional-info">
+                      <h5>Additional Information</h5>
+                      <p>Additional content or features can go here.</p>
                     </div>
                   </div>
                 </Card.Body>
@@ -329,4 +325,4 @@ function Vitaltask() {
   );
 }
 
-export default Vitaltask;
+export default Mytask;

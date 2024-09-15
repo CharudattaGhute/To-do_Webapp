@@ -6,8 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import CreateCategoryForm from "./CreatecategoryForm";
 
-import "../CSS/categories.css"; // Import the component-specific CSS file
-
+import "../CSS/categories.css";
 const TaskCategories = () => {
   const navigate = useNavigate();
   const [taskStatus, setTaskStatus] = useState([
