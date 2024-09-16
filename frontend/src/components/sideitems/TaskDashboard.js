@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Image } from "react-bootstrap";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import axios from "axios";
 import AddTaskModal from "./AddTaskModal";
-import "../CSS/TaskDashboard.css"; // Custom CSS
+import "../CSS/TaskDashboard.css";
 
 function TaskDashboard() {
   const [modalShow, setModalShow] = useState(false);
   const [user, setUser] = useState({});
   const [tasks, setTasks] = useState([]);
   const [expandedTask, setExpandedTask] = useState(null);
-
-  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleModalClose = () => setModalShow(false);
   const handleModalShow = () => setModalShow(true);
@@ -68,11 +66,6 @@ function TaskDashboard() {
     setExpandedTask(expandedTask === taskId ? null : taskId);
   };
 
-  const handleTaskClick = (taskId) => {
-    console.log("Navigating to task details with ID:", taskId);
-    navigate(`taskDashboard/taskdetails/:taskId/${taskId}`);
-  };
-
   return (
     <div className="dashboard-container" style={{ marginTop: "9%" }}>
       <Container>
@@ -107,67 +100,76 @@ function TaskDashboard() {
                   .filter((task) => task.status !== "Completed")
                   .map((task) => (
                     <Col md={12} key={task._id}>
-                      <Card
-                        className="mb-4 task-card shadow-sm"
-                        onClick={() => handleTaskClick(task._id)} //
+                      {/* Use Link to navigate to task details */}
+                      <Link
+                        to={`taskdetails/${task._id}`}
+                        style={{ textDecoration: "none", color: "inherit" }}
                       >
-                        <Card.Body>
-                          <Row>
-                            {/* Task Text */}
-                            <Col xs={8}>
-                              <Card.Title>{task.title}</Card.Title>
-                              <Card.Text>
-                                {expandedTask === task._id
-                                  ? task.description
-                                  : `${task.description.substring(0, 100)}...`}
-                                {task.description.length > 100 && (
-                                  <Button
-                                    variant="link"
-                                    className="read-more-link"
-                                    onClick={() => handleReadMore(task._id)}
-                                  >
-                                    {expandedTask === task._id
-                                      ? "Read Less"
-                                      : "Read More"}
-                                  </Button>
-                                )}
-                                <br />
-                                Priority:{" "}
-                                <span className="priority-text">
-                                  {task.priority}
-                                </span>
-                                {" | "}
-                                Status:{" "}
-                                <span className="status-text">
-                                  {task.status}
-                                </span>
-                              </Card.Text>
-                            </Col>
-                            {/* Task Image */}
-                            <Col xs={4} className="text-center">
-                              <Image
-                                src={
-                                  task.image
-                                    ? task.image
-                                    : "http://localhost:5001/uploads/default-image.jpg"
-                                }
-                                rounded
-                                fluid
-                                style={{ width: "100px", height: "100px" }}
-                              />
-                            </Col>
-                          </Row>
-                          <hr />
-                          <Row className="mt-2">
-                            <Col xs={12} className="text-end">
-                              <small className="text-muted">
-                                Created on:{" "}
-                                {new Date(task.taskDate).toLocaleDateString()}
-                              </small>
-                            </Col>
-                          </Row>
-                        </Card.Body>
-                      </Card>
+                        <Card className="mb-4 task-card shadow-sm">
+                          <Card.Body>
+                            <Row>
+                              {/* Task Text */}
+                              <Col xs={8}>
+                                <Card.Title>{task.title}</Card.Title>
+                                <Card.Text>
+                                  {expandedTask === task._id
+                                    ? task.description
+                                    : `${task.description.substring(
+                                        0,
+                                        100
+                                      )}...`}
+                                  {task.description.length > 100 && (
+                                    <Button
+                                      variant="link"
+                                      className="read-more-link"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        handleReadMore(task._id);
+                                      }}
+                                    >
+                                      {expandedTask === task._id
+                                        ? "Read Less"
+                                        : "Read More"}
+                                    </Button>
+                                  )}
+                                  <br />
+                                  Priority:{" "}
+                                  <span className="priority-text">
+                                    {task.priority}
+                                  </span>
+                                  {" | "}
+                                  Status:{" "}
+                                  <span className="status-text">
+                                    {task.status}
+                                  </span>
+                                </Card.Text>
+                              </Col>
+                              {/* Task Image */}
+                              <Col xs={4} className="text-center">
+                                <Image
+                                  src={
+                                    task.image
+                                      ? task.image
+                                      : "http://localhost:5001/uploads/default-image.jpg"
+                                  }
+                                  rounded
+                                  fluid
+                                  style={{ width: "100px", height: "100px" }}
+                                />
+                              </Col>
+                            </Row>
+                            <hr />
+                            <Row className="mt-2">
+                              <Col xs={12} className="text-end">
+                                <small className="text-muted">
+                                  Created on:{" "}
+                                  {new Date(task.taskDate).toLocaleDateString()}
+                                </small>
+                              </Col>
+                            </Row>
+                          </Card.Body>
+                        </Card>
+                      </Link>
                     </Col>
                   ))}
               </Row>
