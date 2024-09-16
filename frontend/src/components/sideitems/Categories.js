@@ -41,7 +41,7 @@ const TaskCategories = () => {
         className="button"
         style={{ marginLeft: "90%", color: "black", listStyle: "none" }}
       >
-        <Link to={"/dashboard"}>
+        <Link to={"/dashboard/taskDashboard"}>
           <span type="button">Go Back</span>
         </Link>
       </div>
