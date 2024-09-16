@@ -11,6 +11,7 @@ import Vitaltask from "../components/sideitems/Vitaltask";
 import Mytask from "../components/sideitems/Mytask";
 import Accountinfo from "../components/sideitems/Accountinfo";
 import { useNavigate } from "react-router-dom";
+import TaskDetails from "../components/sideitems/TaskDetails";
 
 import "../components/CSS/dashboard.css";
 
@@ -38,9 +39,9 @@ const Dashboard = () => {
   }, []);
 
   const logout = () => {
-    navigate("/login");
     localStorage.removeItem("token");
     setUser(null);
+    navigate("/login");
   };
 
   return (
@@ -125,6 +126,10 @@ const Dashboard = () => {
               element={<CreateCategoryForm />}
             />
             <Route path="Accountinfo" element={<Accountinfo />} />
+            <Route
+              path="taskDashboard/taskdetails/:taskId"
+              element={<TaskDetails />}
+            />
           </Routes>
         </div>
       </div>
