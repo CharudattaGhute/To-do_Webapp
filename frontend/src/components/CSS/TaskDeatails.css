@@ -1,0 +1,76 @@
+/* Container styling */
+.task-details-container {
+    margin-top: 20px;
+    max-width: 900px;
+  }
+  
+  .task-image {
+    width: 150px;
+    height: auto;
+  }
+  
+  .task-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .task-meta {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .priority-moderate {
+    color: #ff9900;
+  }
+  
+  .status-not-started {
+    color: #ff0000;
+  }
+  
+  /* Button styling */
+  .go-back-btn {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 0;
+    border: none;
+    background: none;
+  }
+  
+  .go-back-btn:hover {
+    text-decoration: underline;
+  }
+  
+  /* Icon styles */
+  .edit-icon, .delete-icon, .alert-icon {
+    font-size: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  
+  .edit-icon {
+    color: #ff9900;
+  }
+  
+  .delete-icon {
+    color: #ff4d4d;
+  }
+  
+  .alert-icon {
+    color: #ffcc00;
+  }
+  
+  @media (max-width: 768px) {
+    .task-title {
+      font-size: 20px;
+    }
+  
+    .task-meta {
+      font-size: 14px;
+    }
+  
+    .edit-icon, .delete-icon, .alert-icon {
+      font-size: 18px;
+    }
+  }
+  
