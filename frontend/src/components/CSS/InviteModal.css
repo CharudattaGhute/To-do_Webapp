@@ -1,0 +1,41 @@
+/* InviteModal.css */
+
+.invite-modal .member-list {
+    margin-top: 20px;
+  }
+  
+  .invite-modal .member-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align items to the ends of the container */
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .invite-modal .member-item .member-avatar {
+    margin-right: 15px; /* Space between the image and the details */
+  }
+  
+  .invite-modal .member-item .member-details {
+    flex: 1;
+  }
+  
+  .invite-modal .member-role-dropdown {
+    margin-left: 15px;
+  }
+  
+  .invite-modal .project-link-group {
+    margin-top: 20px;
+  }
+  
+  .invite-modal .copy-link-button {
+    background-color: #F24E1E;
+    border-color: #F24E1E;
+    
+  }
+  
+  .invite-modal .send-button {
+    background-color: #F24E1E;
+    border-color: #F24E1E;
+  }
