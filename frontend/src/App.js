@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import React, { useState } from "react";
 
 import {
   BrowserRouter as Router,
@@ -13,6 +14,10 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const [modalShow, setModalShow] = useState(false);
+
+  const handleShow = () => setModalShow(true);
+  const handleClose = () => setModalShow(false);
   return (
     <Router>
       <Routes>
