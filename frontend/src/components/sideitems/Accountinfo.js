@@ -2,25 +2,22 @@ import React, { useState, useEffect } from "react";
 import "../CSS/accountinfo.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap"; // Import Bootstrap Modal
+import { Modal, Button } from "react-bootstrap";
 
 const Accountinfo = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
-  const [showPasswordForm, setShowPasswordForm] = useState(false); // State to toggle forms
-  const [showImageUrlModal, setShowImageUrlModal] = useState(false); // State to toggle image URL modal
-  const [imageUrl, setImageUrl] = useState(""); // State for storing image URL input
-  const [passwordData, setPasswordData] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
-  });
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [showImageUrlModal, setShowImageUrlModal] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
 
   const handleBack = () => {
-    navigate("/Accountinfo");
+    navigate("/dashboard/taskDashboard");
   };
 
   useEffect(() => {
+    // Get user info
     async function getUserInfo() {
       try {
         const response = await axios.get(
@@ -32,6 +29,13 @@ const Accountinfo = () => {
           }
         );
         setUser(response.data.user);
+
+        const storedImage = localStorage.getItem("profileImage");
+        if (storedImage) {
+          setImageUrl(storedImage);
+        } else if (response.data.user.image) {
+          setImageUrl(`http://localhost:5001${response.data.user.image}`);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -39,35 +43,46 @@ const Accountinfo = () => {
     getUserInfo();
   }, []);
 
-  const handlePasswordChange = (e) => {
-    setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
-  };
-
-  const handlePasswordSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Password Change Data", passwordData);
-    // Implement password change API call
-  };
-
   const handleImageClick = () => {
-    setShowImageUrlModal(true); // Open modal to input image URL
+    setShowImageUrlModal(true);
   };
 
-  const handleImageUrlSubmit = async (e) => {
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handleImageSubmit = async (e) => {
     e.preventDefault();
+
+    if (!selectedFile) {
+      console.log("No file selected");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+
     try {
-      // Send image URL to the server
       const response = await axios.post(
-        "http://localhost:5001/api/user/addimage",
-        { image: imageUrl },
+        "http://localhost:5001/api/image/addimage",
+        formData,
         {
           headers: {
+            "Content-Type": "multipart/form-data",
             Authorization: "Bearer " + localStorage.getItem("token"),
           },
         }
       );
-      setUser({ ...user, image: response.data.image.image }); // Update user image on success
-      setShowImageUrlModal(false); // Close the modal
+
+      const uploadedImageUrl = response.data.image.image;
+      setUser({ ...user, image: uploadedImageUrl });
+
+      const fullImageUrl = `http://localhost:5001${uploadedImageUrl}`;
+      setImageUrl(fullImageUrl);
+      localStorage.setItem("profileImage", fullImageUrl);
+
+      setShowImageUrlModal(false);
+      console.log("Image Uploaded", uploadedImageUrl);
     } catch (error) {
       console.log(error);
     }
@@ -86,15 +101,12 @@ const Accountinfo = () => {
           <>
             <div className="profile-section">
               <img
-                src={
-                  user.image
-                    ? `http://localhost:5001/${user.image}` // Dynamically use the uploaded image URL
-                    : "https://via.placeholder.com/100"
-                }
+                src={imageUrl ? imageUrl : "https://via.placeholder.com/100"}
                 alt="Profile"
                 className="profile-img"
-                onClick={handleImageClick} // Open modal to input image URL
+                onClick={handleImageClick}
               />
+
               <div>
                 <h4>
                   {user.firstname} {user.lastname}
@@ -136,59 +148,21 @@ const Accountinfo = () => {
             </div>
           </>
         ) : (
-          <div className="info-form">
-            <form onSubmit={handlePasswordSubmit}>
-              <label>Current Password</label>
-              <input
-                type="password"
-                name="currentPassword"
-                value={passwordData.currentPassword}
-                onChange={handlePasswordChange}
-                placeholder="Current Password"
-              />
-
-              <label>New Password</label>
-              <input
-                type="password"
-                name="newPassword"
-                value={passwordData.newPassword}
-                onChange={handlePasswordChange}
-                placeholder="New Password"
-              />
-
-              <label>Confirm Password</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={passwordData.confirmPassword}
-                onChange={handlePasswordChange}
-                placeholder="Confirm Password"
-              />
-
-              <div className="form-buttons">
-                <button type="submit" className="update-btn">
-                  Update Password
-                </button>
-              </div>
-            </form>
-          </div>
+          <div className="info-form"></div>
         )}
 
-        {/* Modal for Image URL */}
         <Modal
           show={showImageUrlModal}
           onHide={() => setShowImageUrlModal(false)}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Enter Image URL</Modal.Title>
+            <Modal.Title>Upload Profile Image</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form onSubmit={handleImageUrlSubmit}>
+            <form onSubmit={handleImageSubmit}>
               <input
-                type="text"
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-                placeholder="Enter image URL"
+                type="file"
+                onChange={handleFileChange}
                 className="form-control"
               />
               <div className="form-buttons">
@@ -199,7 +173,7 @@ const Accountinfo = () => {
                   Cancel
                 </Button>
                 <Button variant="primary" type="submit">
-                  Submit
+                  Upload
                 </Button>
               </div>
             </form>
