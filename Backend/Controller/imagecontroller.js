@@ -2,19 +2,24 @@ const mongoose = require("mongoose");
 const imagemodel = require("../Module/image");
 
 async function addimage(req, res) {
-  console.log(req.body);
-  const userid = req.user._id;
-  const { image } = req.body;
-
   try {
+    const userid = req.user._id;
+
+    const imagefile = req.file ? `/uploads/${req.file.filename}` : null;
+
+    if (!imagefile) {
+      return res.status(400).send({ message: "No image file uploaded" });
+    }
+
     const newImage = await imagemodel.create({
       userid,
-      image,
+      image: imagefile,
     });
 
-    res
-      .status(201)
-      .send({ message: "Image Added Successfully", image: newImage });
+    res.status(201).send({
+      message: "Image added successfully",
+      image: newImage,
+    });
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
