@@ -81,8 +81,22 @@ async function userinfo(req, res) {
   }
 }
 
+// ...................................... Get All Users ...................................
+async function getAllUsers(req, res) {
+  try {
+    const users = await usermodel.find();
+    if (!users.length) {
+      return res.status(404).send({ msg: "No users found", success: false });
+    }
+    res.status(200).send({ users, success: true });
+  } catch (error) {
+    res.status(500).send({ error: error.message, success: false });
+  }
+}
+
 module.exports = {
   register,
   login,
   userinfo,
+  getAllUsers,
 };
