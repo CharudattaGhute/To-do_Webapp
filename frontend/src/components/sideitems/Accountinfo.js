@@ -17,7 +17,6 @@ const Accountinfo = () => {
   };
 
   useEffect(() => {
-    // Get user info
     async function getUserInfo() {
       try {
         const response = await axios.get(
