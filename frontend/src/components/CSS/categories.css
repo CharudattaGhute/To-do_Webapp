@@ -1,6 +1,6 @@
 /* TaskCategories Component Specific Styles */
 
-/* Container styling */
+
 .task-categories-container {
     background-color: #f8f9fa;
     padding: 20px;
@@ -9,14 +9,14 @@
     margin-top: 50px;
   }
   
-  /* Heading styles */
+  
   .task-categories-container h2, 
   .task-categories-container h4 {
     color: #333;
     margin-bottom: 20px;
   }
   
-  /* Button styling */
+  
   .task-categories-container .btn {
     border-radius: 5px;
   }
@@ -31,7 +31,7 @@
     border-color: #e64a19;
   }
   
-  /* Table styles */
+  
   .task-categories-container .table {
     width: 100%;
     margin-top: 20px;
@@ -52,7 +52,8 @@
     font-weight: bold;
   }
   
-  /* Action buttons (edit, delete) */
+  
+  
   .task-categories-container .btn-warning {
     background-color: #ff9800;
     border-color: #ff9800;
