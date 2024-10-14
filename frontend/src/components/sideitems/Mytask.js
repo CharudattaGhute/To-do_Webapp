@@ -44,7 +44,6 @@ function Mytask() {
     setSelectedTask(task);
   };
 
-  // Helper functions for styling
   const getStatusColor = (status) => {
     switch (status) {
       case "Completed":
