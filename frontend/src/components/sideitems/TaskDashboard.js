@@ -224,7 +224,6 @@ function TaskDashboard() {
               </div>
             </div>
 
-            {/* Completed Tasks */}
             <div className="task-section mt-4">
               <h5>Completed Tasks</h5>
               <Row>
