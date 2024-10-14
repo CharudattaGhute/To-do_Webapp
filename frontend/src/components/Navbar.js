@@ -12,11 +12,9 @@ const Navbar = () => {
   const [currentDay, setCurrentDay] = useState("");
 
   useEffect(() => {
-    // Get the current date in a readable format
     const today = new Date();
     setCurrentDate(today.toLocaleDateString());
 
-    // Set the current day of the week
     const days = [
       "Sunday",
       "Monday",
@@ -56,7 +54,6 @@ const Navbar = () => {
 
         <div className="d-flex align-items-center">
           <a href="#" className="nav-icons me-3">
-            {/* Bell icon */}
             <svg
               width="45"
               height="45"
@@ -72,7 +69,6 @@ const Navbar = () => {
             </svg>
           </a>
 
-          {/* Calendar Icon */}
           <a href="#" className="nav-icons me-3" onClick={handleCalendarClick}>
             <svg
               width="45"
@@ -89,7 +85,6 @@ const Navbar = () => {
             </svg>
           </a>
 
-          {/* Calendar Dropdown */}
           {showCalendar && (
             <div className="calendar-dropdown">
               <DatePicker
@@ -101,9 +96,7 @@ const Navbar = () => {
             </div>
           )}
 
-          {/* Date Information */}
           <div class="d-flex flex-column bd-highlight mb-3 ml-2 justify-content-start">
-            {/* Display current date and day */}
             <span className="text-black me-3">{currentDate}</span>
             <span className="text-black me-3">{currentDay}</span>
           </div>
