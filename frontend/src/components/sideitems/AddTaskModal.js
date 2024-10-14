@@ -7,14 +7,13 @@ function AddTaskModal({ show, handleClose }) {
   const [taskDate, setTaskDate] = useState("");
   const [priority, setPriority] = useState("Moderate");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null); // This will hold the file object
+  const [image, setImage] = useState(null);
   const [status, setStatus] = useState("Not started");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Handle image file selection
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]); // Set the file object
+    setImage(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
@@ -25,7 +24,6 @@ function AddTaskModal({ show, handleClose }) {
       return;
     }
 
-    // Create FormData instance
     const formData = new FormData();
     formData.append("title", title);
     formData.append("taskDate", taskDate);
@@ -33,7 +31,7 @@ function AddTaskModal({ show, handleClose }) {
     formData.append("description", description);
     formData.append("status", status);
     if (image) {
-      formData.append("image", image); // Append the image file
+      formData.append("image", image);
     }
 
     try {
@@ -43,14 +41,13 @@ function AddTaskModal({ show, handleClose }) {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data", // Important for file uploads
+            "Content-Type": "multipart/form-data",
           },
         }
       );
       setSuccess("Task added successfully!");
       console.log("Response Data:", response.data);
 
-      // Reset form fields
       setTitle("");
       setTaskDate("");
       setPriority("Moderate");

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Dropdown, Spinner, Alert } from "react-bootstrap";
 import axios from "axios";
-import "../CSS/InviteModal.css"; // Import the CSS file
-
+import "../CSS/InviteModal.css";
 function InviteModal({ show, handleClose }) {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,7 +24,6 @@ function InviteModal({ show, handleClose }) {
 
         const data = response.data;
 
-        // Check if the response contains the 'users' property and that it is an array
         if (data && Array.isArray(data.users)) {
           setUsers(data.users);
           console.log("data users", data.users);
@@ -37,7 +35,7 @@ function InviteModal({ show, handleClose }) {
         console.error("Failed to load users:", err);
         setError("Failed to load users.");
       } finally {
-        setLoading(false); // Stop loading regardless of success or failure
+        setLoading(false);
       }
     };
 
@@ -73,47 +71,43 @@ function InviteModal({ show, handleClose }) {
                   marginLeft: "20px",
                   backgroundColor: "#F24E1E",
                   borderColor: "#F24E1E",
-                }} // Increased width
+                }}
               >
                 Send Invite
               </Button>
             </Form.Group>
 
-            {/* Member List */}
             <div className="member-list">
-              {
-                users.length > 0
-                  ? users.map((user) => (
-                      <div className="member-item" key={user.email}>
-                        <img
-                          src={`https://via.placeholder.com/40?text=${user.username[0]}`}
-                          alt={user.username}
-                          className="member-avatar"
-                        />
-                        <div className="member-details">
-                          <p className="member-name">{user.username}</p>
-                          <p className="member-email">{user.email}</p>
-                        </div>
-                        <Dropdown className="member-role-dropdown">
-                          <Dropdown.Toggle
-                            variant="form-label"
-                            id={`dropdown-basic-${user.email}`}
-                          >
-                            Can edit
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu>
-                            <Dropdown.Item>Can edit</Dropdown.Item>
-                            <Dropdown.Item>Owner</Dropdown.Item>
-                            <Dropdown.Item>Remove</Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
+              {users.length > 0
+                ? users.map((user) => (
+                    <div className="member-item" key={user.email}>
+                      <img
+                        src={`https://via.placeholder.com/40?text=${user.username[0]}`}
+                        alt={user.username}
+                        className="member-avatar"
+                      />
+                      <div className="member-details">
+                        <p className="member-name">{user.username}</p>
+                        <p className="member-email">{user.email}</p>
                       </div>
-                    ))
-                  : !loading && <p>No users found.</p> // Display only if not loading
-              }
+                      <Dropdown className="member-role-dropdown">
+                        <Dropdown.Toggle
+                          variant="form-label"
+                          id={`dropdown-basic-${user.email}`}
+                        >
+                          Can edit
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                          <Dropdown.Item>Can edit</Dropdown.Item>
+                          <Dropdown.Item>Owner</Dropdown.Item>
+                          <Dropdown.Item>Remove</Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </div>
+                  ))
+                : !loading && <p>No users found.</p>}
             </div>
 
-            {/* Project Link */}
             <Form.Group
               controlId="formProjectLink"
               className="project-link-group"
@@ -134,7 +128,7 @@ function InviteModal({ show, handleClose }) {
                     marginLeft: "20px",
                     backgroundColor: "#F24E1E",
                     borderColor: "#F24E1E",
-                  }} // Increased width
+                  }}
                 >
                   Copy Link
                 </Button>
@@ -143,7 +137,7 @@ function InviteModal({ show, handleClose }) {
           </Form>
         )}
       </Modal.Body>
-      <Modal.Footer>{/* Optional footer content */}</Modal.Footer>
+      <Modal.Footer></Modal.Footer>
     </Modal>
   );
 }
