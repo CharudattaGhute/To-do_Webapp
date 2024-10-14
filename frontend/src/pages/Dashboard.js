@@ -39,10 +39,9 @@ const Dashboard = () => {
     getUserInfo();
   }, []);
   useEffect(() => {
-    // Retrieve the image from localStorage when the component mounts
     const storedImage = localStorage.getItem("profileImage");
     if (storedImage) {
-      setProfileImage(storedImage); // Set the profile image if available
+      setProfileImage(storedImage);
     }
   }, []);
 
