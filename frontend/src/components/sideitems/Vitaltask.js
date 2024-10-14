@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import "../CSS/vital.css"; // Correct import path if needed
+import "../CSS/vital.css";
 
 function Vitaltask() {
   const [tasks, setTasks] = useState([]);
@@ -242,7 +242,6 @@ function Vitaltask() {
 
                       <Card.Text>{selectedTask.description}</Card.Text>
 
-                      {/* Additional content below description */}
                       <div className="additional-info">
                         <h5>Additional Information</h5>
                         <p>Additional content or features can go here.</p>
@@ -289,7 +288,6 @@ function Vitaltask() {
         </Row>
       </Container>
 
-      {/* Update Modal */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Update Task</Modal.Title>
