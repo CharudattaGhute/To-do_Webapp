@@ -1,4 +1,4 @@
-/* Sidebar styling */
+
 .sidebar {
     background-color: #F46B6B;
     height: 100vh;
@@ -8,12 +8,12 @@
     position: fixed;
   }
   
-  /* Center the profile and text */
+ 
   .sidebar .container {
     padding-top: 20px;
   }
   
-  /* Style for the Nav links */
+  
   .nav-link-custom {
     color: white;
     padding: 15px 20px;
@@ -28,17 +28,17 @@
     opacity: 0.8;
   }
   
-  /* Icon styling */
+  
   .nav-link-custom svg {
     margin-right: 10px;
   }
   
-  /* Remove underline from links */
+  
   .nav-link-custom:hover {
     text-decoration: none;
   }
   
-  /* Text styling */
+  
   .sidebar h5 {
     color: white;
   }
@@ -47,7 +47,7 @@
     color: rgba(255, 255, 255, 0.7);
   }
   
-  /* Ensure the Offcanvas matches Sidebar (if applicable) */
+  
   .offcanvas {
     width: 250px;
     background-color: #F46B6B;
