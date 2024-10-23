@@ -20,7 +20,7 @@ const Accountinfo = () => {
     async function getUserInfo() {
       try {
         const response = await axios.get(
-          "http://localhost:5001/api/user/userinfo",
+          "https://to-do-webapp-backend.onrender.com/api/user/userinfo",
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
@@ -33,7 +33,7 @@ const Accountinfo = () => {
         if (storedImage) {
           setImageUrl(storedImage);
         } else if (response.data.user.image) {
-          setImageUrl(`http://localhost:5001${response.data.user.image}`);
+          setImageUrl(`https://to-do-webapp-backend.onrender.com${response.data.user.image}`);
         }
       } catch (error) {
         console.log(error);
