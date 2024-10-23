@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 mongoose.connect(
-  "mongodb+srv://ghutecharudatta:Charudatta@cluster0.prqkren.mongodb.net/To_Do_task"
+  "mongodb+srv://ghutecharudatta:Charudatta@cluster0.prqkren.mongodb.net/To_DO-Task"
 );
 
 const database = mongoose.connection;
