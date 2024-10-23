@@ -13,7 +13,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb://localhost:27017/Todo_task");
+mongoose.connect(
+  "mongodb+srv://ghutecharudatta:Charudatta@cluster0.prqkren.mongodb.net/To_Do_task"
+);
 
 const database = mongoose.connection;
 database.on("error", (error) => {
