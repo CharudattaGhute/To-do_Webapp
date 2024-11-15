@@ -76,7 +76,7 @@ const Accountinfo = () => {
       const uploadedImageUrl = response.data.image.image;
       setUser({ ...user, image: uploadedImageUrl });
 
-      const fullImageUrl = `http://localhost:5001${uploadedImageUrl}`;
+      const fullImageUrl = `https://to-do-webapp-backend.onrender.com${uploadedImageUrl}`;
       setImageUrl(fullImageUrl);
       localStorage.setItem("profileImage", fullImageUrl);
 
