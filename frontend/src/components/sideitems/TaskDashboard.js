@@ -153,7 +153,7 @@ function TaskDashboard() {
                                   src={
                                     task.image
                                       ? task.image
-                                      : "http://localhost:5001/uploads/default-image.jpg"
+                                      : "https://to-do-webapp-backend.onrender.com/uploads/default-image.jpg"
                                   }
                                   rounded
                                   fluid
@@ -252,7 +252,7 @@ function TaskDashboard() {
                                 src={
                                   task.image
                                     ? task.image
-                                    : "http://localhost:5001/uploads/default-image.jpg"
+                                    : "https://to-do-webapp-backend.onrender.com/uploads/default-image.jpg"
                                 }
                                 rounded
                                 fluid
