@@ -24,7 +24,7 @@ function Mytask() {
   // Fetch tasks from API with token
   useEffect(() => {
     axios
-      .get("http://localhost:5001/api/task/getTasksForUser", {
+      .get("https://to-do-webapp-backend.onrender.com/api/task/getTasksForUser", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -72,7 +72,7 @@ function Mytask() {
   const handleUpdateTask = () => {
     axios
       .put(
-        `http://localhost:5001/api/task/updateTask/${selectedTask._id}`,
+        `https://to-do-webapp-backend.onrender.com/api/task/updateTask/${selectedTask._id}`,
         {
           title: updatedTitle,
           description: updatedDescription,
@@ -99,7 +99,7 @@ function Mytask() {
 
   const handleDeleteTask = (taskId) => {
     axios
-      .delete(`http://localhost:5001/api/task/deleteTask/${taskId}`, {
+      .delete(`https://to-do-webapp-backend.onrender.com/api/task/deleteTask/${taskId}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -206,8 +206,8 @@ function Mytask() {
                     <Card.Img
                       src={
                         selectedTask.image
-                          ? `http://localhost:5001/uploads/${selectedTask.image}`
-                          : "http://localhost:5001/uploads/default-image.jpg"
+                          ? `https://to-do-webapp-backend.onrender.com/uploads/${selectedTask.image}`
+                          : "https://to-do-webapp-backend.onrender.com/default-image.jpg"
                       }
                       style={{
                         width: "200px",
