@@ -12,7 +12,7 @@ const TaskDetails = () => {
     async function fetchTaskDetails() {
       try {
         const response = await axios.get(
-          `http://localhost:5001/api/task/getTaskById/${taskId}`,
+          `https://to-do-webapp-backend.onrender.com/api/task/getTaskById/${taskId}`,
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
@@ -39,7 +39,7 @@ const TaskDetails = () => {
               <Image
                 src={
                   task.image ||
-                  "http://localhost:5001/uploads/default-image.jpg"
+                  "https://to-do-webapp-backend.onrender.com/uploads/default-image.jpg"
                 }
                 className="task-image"
               />
