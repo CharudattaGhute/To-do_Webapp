@@ -14,7 +14,7 @@ function InviteModal({ show, handleClose }) {
 
       try {
         const response = await axios.get(
-          "http://localhost:5001/api/user/getAllUsers",
+          "https://to-do-webapp-backend.onrender.com/api/user/getAllUsers",
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
