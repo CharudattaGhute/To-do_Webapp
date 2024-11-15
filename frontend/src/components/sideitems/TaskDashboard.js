@@ -24,7 +24,7 @@ function TaskDashboard() {
     async function getUserInfo() {
       try {
         const response = await axios.get(
-          "http://localhost:5001/api/user/userinfo",
+          "https://to-do-webapp-backend.onrender.com/api/user/userinfo",
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
@@ -43,7 +43,7 @@ function TaskDashboard() {
     async function getAllTasks() {
       try {
         const response = await axios.get(
-          "http://localhost:5001/api/task/getalltask",
+          "https://to-do-webapp-backend.onrender.com/api/task/getalltask",
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
