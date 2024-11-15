@@ -24,7 +24,7 @@ function Vitaltask() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5001/api/task/getFilteredTasks", {
+      .get("https://to-do-webapp-backend.onrender.com/api/task/getFilteredTasks", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -72,7 +72,7 @@ function Vitaltask() {
   const handleUpdateTask = () => {
     axios
       .put(
-        `http://localhost:5001/api/task/updateTask/${selectedTask._id}`,
+        `https://to-do-webapp-backend.onrender.com/api/task/updateTask/${selectedTask._id}`,
         {
           title: updatedTitle,
           description: updatedDescription,
@@ -99,7 +99,7 @@ function Vitaltask() {
 
   const handleDeleteTask = (taskId) => {
     axios
-      .delete(`http://localhost:5001/api/task/deleteTask/${taskId}`, {
+      .delete(`https://to-do-webapp-backend.onrender.com/api/task/deleteTask/${taskId}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -148,8 +148,8 @@ function Vitaltask() {
                       <img
                         src={
                           task.image
-                            ? `http://localhost:5001/uploads/${task.image}`
-                            : "http://localhost:5001/uploads/default-image.jpg"
+                            ? `https://to-do-webapp-backend.onrender.com/uploads/${task.image}`
+                            : "https://to-do-webapp-backend.onrender.com/uploads/default-image.jpg"
                         }
                         alt="Task"
                         style={{
@@ -212,8 +212,8 @@ function Vitaltask() {
                       <Card.Img
                         src={
                           selectedTask.image
-                            ? `http://localhost:5001/uploads/${selectedTask.image}`
-                            : "http://localhost:5001/uploads/default-image.jpg"
+                            ? `https://to-do-webapp-backend.onrender.com/uploads/${selectedTask.image}`
+                            : "https://to-do-webapp-backend.onrender.com/uploads/default-image.jpg"
                         }
                         style={{
                           width: "200px",
