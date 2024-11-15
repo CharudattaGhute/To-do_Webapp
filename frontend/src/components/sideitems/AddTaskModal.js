@@ -36,7 +36,7 @@ function AddTaskModal({ show, handleClose }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:5001/api/task/addtask",
+        "https://to-do-webapp-backend.onrender.com/api/task/addtask",
         formData,
         {
           headers: {
