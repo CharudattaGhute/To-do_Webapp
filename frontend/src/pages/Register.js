@@ -24,7 +24,7 @@ const Register = () => {
   async function register(payload) {
     try {
       const response = await axios.post(
-        "http://localhost:5001/api/user/register",
+        "https://to-do-webapp-backend.onrender.com/api/user/register",
         payload
       );
       toast.success(response.data.message || "Registration Successful");
